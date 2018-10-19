@@ -25,7 +25,7 @@ SECRET_KEY = 'f=6)j$)m#@(65npi7h-g4&k1t)@cy@q74&$^iu3l*lu003zaq#'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['arstandard-env.yh2cg6htn7.ap-northeast-2.elasticbeanstalk.com','127.0.0.1','localhost']
 
 
 # Application definition
@@ -37,6 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'marker.apps.MarkerConfig',
+    'vuforia.apps.VuforiaConfig',
+    'django_cleanup',
 ]
 
 MIDDLEWARE = [
@@ -118,7 +121,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
-STATIC_ROOT = os.path.join(BASE_DIR, "..", "www", "static")
+STATIC_ROOT = os.path.join(BASE_DIR, "www", "static")
 STATIC_URL = '/static/'
 
 MEDIA_URL = '/media/'
