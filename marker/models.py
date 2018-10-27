@@ -1,6 +1,12 @@
 from django.db import models
 import os
 from django.core.files.storage import FileSystemStorage
+import vws
+import io
+from vuforia.models import *
+import json
+from django.contrib import messages
+from django.core.exceptions import ValidationError
 
 def ios_asset_bundle_rename(instance, filename):
   filename = '{}.{}'.format(instance.target_name, 'asset')
@@ -32,9 +38,11 @@ def rename(instance, filename):
   return os.path.join('marker/android/', filename)
 
 # Create your models here.
+
 class Marker(models.Model):
   marker_image = models.ImageField(blank=False, upload_to='marker/image/', verbose_name='Marker(JPG)')
   target_name = models.CharField(unique=True,max_length=100)
+  target_id =models.CharField(max_length=100,unique=True)
   width = models.IntegerField()
   ios_asset_bundle = models.FileField(blank=True, upload_to=ios_asset_bundle_rename,max_length=500, storage=OverwriteStorage())
   ios_manifest = models.FileField(blank=True, upload_to=ios_manifest_rename,max_length=500, storage=OverwriteStorage())
@@ -44,3 +52,5 @@ class Marker(models.Model):
 
   class Meta:
     db_table = 'marker'
+
+#  def save(self, *args, **kwargs):
